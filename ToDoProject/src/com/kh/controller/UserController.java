@@ -19,4 +19,22 @@ public class UserController {
 		}
 		
 	}
+	
+	public void userLogin(String id, String pw) {
+		
+		User u = new UserService().userLogin(id, pw);
+		
+		if(u != null) {
+			if(u.getUserPw().equals(pw)) {
+				new Menu().loginSuccess();
+			} else {
+				new Menu().displayFail("비밀번호가 틀립니다.");
+			}
+		} else {
+			new Menu().displayFail("아이디가 없습니다.");
+		}
+		
+			
+			
+	}	
 }

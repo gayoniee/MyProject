@@ -23,4 +23,13 @@ public class UserService {
 		return result;
 		
 	}
+	
+	public User userLogin(String id, String pw){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		User u = new UserDao().userLogin(conn, id, pw);
+		JDBCTemplate.close(conn);
+		
+		return u;
+	}
 }

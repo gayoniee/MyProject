@@ -2,9 +2,9 @@
  * 
  */
 /**
- * @author user1
+ * @author luvty
  *
  */
-module ToDo_Project {
+module ToDoProject {
 	requires java.sql;
 }

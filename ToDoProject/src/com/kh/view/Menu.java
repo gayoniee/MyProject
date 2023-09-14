@@ -78,7 +78,7 @@ public class Menu {
 		System.out.print("\n비밀번호 : ");
 		String pw = sc.nextLine();
 		
-		
+		 uc.userLogin(id, pw);
 		
 	}
 	
@@ -101,5 +101,7 @@ public class Menu {
 			System.out.println("\n서비스 요청 실패 : " + message);
 		}
 	
-	
+		public void loginSuccess() {
+			System.out.println("로그인 성공!");
+		}
 }

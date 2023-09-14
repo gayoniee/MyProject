@@ -2,6 +2,7 @@ package com.kh.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.kh.common.JDBCTemplate;
@@ -38,5 +39,40 @@ public class UserDao {
 		
 	}
 	
+	public User userLogin(Connection conn, String id, String pw) {
+		
+		User u = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM USERS WHERE USER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				u = new User (rset.getInt("userNo"),
+							 rset.getString("userId"),
+							 rset.getString("userPw"),
+							 rset.getString("userName"),
+							 rset.getInt("age"),
+							 rset.getString("gender"),
+							 rset.getString("email"),
+							 rset.getString("phone"),
+							 rset.getDate("enrollDate"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return u;
+	}
 	
 }
