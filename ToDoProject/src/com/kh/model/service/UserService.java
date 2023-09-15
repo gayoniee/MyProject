@@ -28,6 +28,7 @@ public class UserService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		User u = new UserDao().userLogin(conn, id, pw);
+		
 		JDBCTemplate.close(conn);
 		
 		return u;

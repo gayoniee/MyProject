@@ -49,20 +49,19 @@ public class UserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, id);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				u = new User (rset.getInt("userNo"),
-							 rset.getString("userId"),
-							 rset.getString("userPw"),
-							 rset.getString("userName"),
-							 rset.getInt("age"),
-							 rset.getString("gender"),
-							 rset.getString("email"),
-							 rset.getString("phone"),
-							 rset.getDate("enrollDate"));
+				u = new User (rset.getInt("USER_NO"),
+							 rset.getString("USER_ID"),
+							 rset.getString("USER_PW"),
+							 rset.getString("USER_NAME"),
+							 rset.getInt("AGE"),
+							 rset.getString("GENDER"),
+							 rset.getString("EMAIL"),
+							 rset.getString("PHONE"),
+							 rset.getDate("ENROLLDATE"));
 			}
 			
 		} catch (SQLException e) {

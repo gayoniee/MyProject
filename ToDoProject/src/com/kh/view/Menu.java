@@ -82,6 +82,56 @@ public class Menu {
 		
 	}
 	
+	public void toDoMenu() {
+		
+		while(true) {
+			
+			System.out.println("\n==To-Do Menu==");
+			System.out.println("1. 일정 추가");
+			System.out.println("2. 일정 조회");
+			System.out.println("3. 일정 수정");
+			System.out.println("4. 일정 삭제");
+			System.out.println("5. 내 정보 수정");
+			System.out.println("6. 내 정보 조회");
+			System.out.println("7. 회원 탈퇴");
+			System.out.println("0. 로그아웃");
+			
+			System.out.print(">> 메뉴 선택 : ");
+			int menu = sc.nextInt();
+			sc.nextLine();
+			
+			switch(menu) {
+				case 1:{
+					insertToDo();
+				}break;
+				case 2:{
+					
+				}break;
+				case 3:{
+					
+				}break;
+				case 4:{
+					
+				}break;
+				case 5:{
+					
+				}break;
+				case 6:{
+					
+				}break;
+				case 7:{
+					
+				}break;
+				case 0:{
+					System.out.println("메인 메뉴로 돌아갑니다.");
+				}return;
+				default:{
+					System.out.println("번호를 잘못 입력하셨습니다. 다시 입력해주세요.");
+				}
+			}
+		}
+	}
+	
 	
 	//-------------------------------응답화면----------------------------------
 	
@@ -103,5 +153,6 @@ public class Menu {
 	
 		public void loginSuccess() {
 			System.out.println("로그인 성공!");
+			toDoMenu();
 		}
 }
