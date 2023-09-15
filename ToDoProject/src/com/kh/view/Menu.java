@@ -2,6 +2,7 @@ package com.kh.view;
 
 import java.util.Scanner;
 
+import com.kh.controller.ScheduleController;
 import com.kh.controller.UserController;
 
 
@@ -10,6 +11,7 @@ public class Menu {
 	private Scanner sc = new Scanner(System.in);
 	
 	private UserController uc = new UserController();
+	private ScheduleController scr = new ScheduleController();
 	
 	public void mainMenu() {
 		
@@ -130,6 +132,29 @@ public class Menu {
 				}
 			}
 		}
+	}
+	
+	public void insertToDo() {
+		System.out.println("\n=== 일정 등록 ===");
+		
+		System.out.print("일정 번호 : ");
+		String schedulNo = sc.nextLine();
+		
+		System.out.print("일정 제목 : ");
+		String title = sc.nextLine();
+		
+		System.out.print("세부내용 : ");
+		String detail = sc.nextLine();
+		
+		System.out.print("마감일(YY/MM/DD) : ");
+		String deadline = sc.nextLine();
+		
+		
+		
+		System.out.print("실행여부(y/n) : ");
+		String clear = sc.nextLine().toUpperCase();
+		
+		scr.insertToDo(schedulNo, title, detail, deadline, clear);
 	}
 	
 	
