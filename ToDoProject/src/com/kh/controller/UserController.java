@@ -26,7 +26,7 @@ public class UserController {
 		
 		if(u != null) {
 			if(u.getUserPw().equals(pw)) {
-				new Menu().loginSuccess();
+				new Menu().loginSuccess(u);
 			} else {
 				new Menu().displayFail("비밀번호가 틀립니다.");
 			}

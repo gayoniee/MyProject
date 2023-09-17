@@ -1,9 +1,12 @@
 package com.kh.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.controller.ScheduleController;
 import com.kh.controller.UserController;
+import com.kh.model.vo.Schedule;
+import com.kh.model.vo.User;
 
 
 public class Menu {
@@ -84,13 +87,13 @@ public class Menu {
 		
 	}
 	
-	public void toDoMenu() {
+	public void toDoMenu(User u) {
 		
 		while(true) {
 			
 			System.out.println("\n==To-Do Menu==");
 			System.out.println("1. 일정 추가");
-			System.out.println("2. 일정 조회");
+			System.out.println("2. 내 일정 조회");
 			System.out.println("3. 일정 수정");
 			System.out.println("4. 일정 삭제");
 			System.out.println("5. 내 정보 수정");
@@ -104,10 +107,10 @@ public class Menu {
 			
 			switch(menu) {
 				case 1:{
-					insertToDo();
+					insertToDo(u);
 				}break;
 				case 2:{
-					
+					scr.viewSchedule(u);
 				}break;
 				case 3:{
 					
@@ -134,11 +137,8 @@ public class Menu {
 		}
 	}
 	
-	public void insertToDo() {
+	public void insertToDo(User u) {
 		System.out.println("\n=== 일정 등록 ===");
-		
-		System.out.print("일정 번호 : ");
-		String schedulNo = sc.nextLine();
 		
 		System.out.print("일정 제목 : ");
 		String title = sc.nextLine();
@@ -149,12 +149,7 @@ public class Menu {
 		System.out.print("마감일(YY/MM/DD) : ");
 		String deadline = sc.nextLine();
 		
-		
-		
-		System.out.print("실행여부(y/n) : ");
-		String clear = sc.nextLine().toUpperCase();
-		
-		scr.insertToDo(schedulNo, title, detail, deadline, clear);
+		scr.insertToDo(u, title, detail, deadline);
 	}
 	
 	
@@ -176,8 +171,23 @@ public class Menu {
 			System.out.println("\n서비스 요청 실패 : " + message);
 		}
 	
-		public void loginSuccess() {
+		public void loginSuccess(User u) {
 			System.out.println("로그인 성공!");
-			toDoMenu();
+			toDoMenu(u);
+		}
+		
+		public void displayNoData(String message) {
+			System.out.println("\n" + message);
+		}
+		
+		
+		public void displayScheduleList(ArrayList<Schedule> list) {
+			System.out.println("\n조회된 데이터는 다음과 같습니다\n");
+			
+			for(int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i));
+			}
+			
+				
 		}
 }

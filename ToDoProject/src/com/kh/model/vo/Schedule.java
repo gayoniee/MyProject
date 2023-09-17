@@ -4,7 +4,7 @@ package com.kh.model.vo;
 public class Schedule {
 	
 	private int scheduleId;
-	private int schedulNo;
+	private int scheduleNo;
 	private String title;
 	private String detail;
 	private String deadline;
@@ -16,9 +16,8 @@ public class Schedule {
 
 	
 	
-	public Schedule(int schedulNo, String title, String detail, String deadline, String clear) {
-		super();
-		this.schedulNo = schedulNo;
+	public Schedule(int scheduleNo, String title, String detail, String deadline, String clear) {
+		this.scheduleNo = scheduleNo;
 		this.title = title;
 		this.detail = detail;
 		this.deadline = deadline;
@@ -26,15 +25,23 @@ public class Schedule {
 	}
 
 
-	public Schedule(int scheduleId, int schedulNo, String title, String detail, String deadline, String clear) {
+	public Schedule(int scheduleId, int scheduleNo, String title, String detail, String deadline, String clear) {
 		super();
 		this.scheduleId = scheduleId;
-		this.schedulNo = schedulNo;
+		this.scheduleNo = scheduleNo;
 		this.title = title;
 		this.detail = detail;
 		this.deadline = deadline;
 		this.clear = clear;
 	}
+
+	public Schedule(String title, String detail, String deadline) {
+		this.title = title;
+		this.detail = detail;
+		this.deadline = deadline;
+	}
+
+
 
 	public int getScheduleId() {
 		return scheduleId;
@@ -44,12 +51,12 @@ public class Schedule {
 		this.scheduleId = scheduleId;
 	}
 
-	public int getSchedulNo() {
-		return schedulNo;
+	public int getScheduleNo() {
+		return scheduleNo;
 	}
 
-	public void setSchedulNo(int schedulNo) {
-		this.schedulNo = schedulNo;
+	public void setScheduleNo(int scheduleNo) {
+		this.scheduleNo = scheduleNo;
 	}
 
 	public String getTitle() {
@@ -86,7 +93,7 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return scheduleId + ", " + schedulNo + ", " + title + ", "
+		return scheduleId + ", " + scheduleNo + ", " + title + ", "
 				+ detail + ", " + deadline + ", " + clear;
 	}
 	

@@ -1,17 +1,18 @@
 package com.kh.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.model.dao.ScheduleDao;
 import com.kh.model.vo.Schedule;
-
+import com.kh.model.vo.User;
 public class ScheduleService {
 
-public int inputUser(Schedule s) {
+	public int insertToDo(User u, Schedule s) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new ScheduleDao().insertToDo(conn, s);
+		int result = new ScheduleDao().insertToDo(conn, u, s);
 		
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
@@ -24,4 +25,12 @@ public int inputUser(Schedule s) {
 		
 	}
 	
+	public ArrayList<Schedule> selectList(User u) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Schedule> list = new ScheduleDao().selectList(u, conn);
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
 }
