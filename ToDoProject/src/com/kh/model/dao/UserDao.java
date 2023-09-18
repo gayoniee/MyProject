@@ -74,4 +74,30 @@ public class UserDao {
 		return u;
 	}
 	
+	public int updateUser(Connection conn, User u, User user) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE USERS SET USER_PW = ?, USER_NAME = ?, EMAIL = ?, PHONE = ? WHERE USER_ID = ?";               
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, user.getUserPw());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, user.getEmail());
+			pstmt.setString(4, user.getPhone());
+			pstmt.setString(5, u.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 }

@@ -33,4 +33,34 @@ public class ScheduleService {
 		
 		return list;
 	}
+	
+	public int updateSchedule(User u, Schedule s, String scheduleNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ScheduleDao().updateSchedule(conn, u, s, scheduleNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int deleteSchedule(String scheduleNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ScheduleDao().deleteSchedule(conn, scheduleNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

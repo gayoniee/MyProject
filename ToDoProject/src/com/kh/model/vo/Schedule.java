@@ -1,5 +1,6 @@
 package com.kh.model.vo;
 
+import java.sql.Date;
 
 public class Schedule {
 	
@@ -7,7 +8,7 @@ public class Schedule {
 	private int scheduleNo;
 	private String title;
 	private String detail;
-	private String deadline;
+	private Date deadline;
 	private String clear;
 	
 	public Schedule() {
@@ -16,7 +17,7 @@ public class Schedule {
 
 	
 	
-	public Schedule(int scheduleNo, String title, String detail, String deadline, String clear) {
+	public Schedule(int scheduleNo, String title, String detail, Date deadline, String clear) {
 		this.scheduleNo = scheduleNo;
 		this.title = title;
 		this.detail = detail;
@@ -25,7 +26,7 @@ public class Schedule {
 	}
 
 
-	public Schedule(int scheduleId, int scheduleNo, String title, String detail, String deadline, String clear) {
+	public Schedule(int scheduleId, int scheduleNo, String title, String detail, Date deadline, String clear) {
 		super();
 		this.scheduleId = scheduleId;
 		this.scheduleNo = scheduleNo;
@@ -35,7 +36,7 @@ public class Schedule {
 		this.clear = clear;
 	}
 
-	public Schedule(String title, String detail, String deadline) {
+	public Schedule(String title, String detail, Date deadline) {
 		this.title = title;
 		this.detail = detail;
 		this.deadline = deadline;
@@ -75,11 +76,11 @@ public class Schedule {
 		this.detail = detail;
 	}
 
-	public String getDeadline() {
+	public Date getDeadline() {
 		return deadline;
 	}
 
-	public void setDeadline(String deadline) {
+	public void setDeadline(Date deadline) {
 		this.deadline = deadline;
 	}
 
@@ -93,7 +94,7 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return scheduleId + ", " + scheduleNo + ", " + title + ", "
+		return scheduleNo + ", " + title + ", "
 				+ detail + ", " + deadline + ", " + clear;
 	}
 	

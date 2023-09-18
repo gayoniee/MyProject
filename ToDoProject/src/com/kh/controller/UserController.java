@@ -33,8 +33,25 @@ public class UserController {
 		} else {
 			new Menu().displayFail("아이디가 없습니다.");
 		}
-		
-			
-			
+				
 	}	
+	
+	public void updateUser(User u, String userPw, String userName, String email, String phone) {
+		
+		User user = new User();
+		
+		user.setUserPw(userPw);
+		user.setUserName(userName);
+		user.setEmail(email);
+		user.setPhone(phone);
+		
+		int result = new UserService().updateUser(u, user);
+		
+		if(result > 0) {
+			new Menu().displaySuccess("내 정보가 수정되었습니다.");
+		} else {
+			new Menu().displayFail("정보 수정에 실패하였습니다.");
+		}
+		
+	}
 }

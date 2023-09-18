@@ -1,5 +1,8 @@
 package com.kh.controller;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.kh.model.service.ScheduleService;
@@ -11,7 +14,7 @@ public class ScheduleController {
 
 	public void insertToDo(User u, String title, String detail, String deadline) {
 		
-		Schedule s = new Schedule(title, detail, deadline);
+		Schedule s = new Schedule(title, detail, transformDate(deadline));
 		
 		int result = new ScheduleService().insertToDo(u, s);
 		
@@ -22,6 +25,24 @@ public class ScheduleController {
 		}
 	}
 	
+	public Date transformDate(String deadline) {
+		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyymmdd");		
+		SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");
+        
+        java.util.Date tempDate = null;
+        
+        try {
+            tempDate = beforeFormat.parse(deadline);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        String transDate = afterFormat.format(tempDate);        
+        Date d = Date.valueOf(transDate);
+        
+        return d;
+    }
+		
 	public void viewSchedule(User u) {
 		ArrayList<Schedule> list = new ScheduleService().selectList(u);
 		
@@ -32,4 +53,33 @@ public class ScheduleController {
 		}
 	}
 
+	public void updateSchedule(User u, String scheduleNo, String title, String detail, String deadline, String clear) {
+		Schedule s = new Schedule();
+		
+		s.setScheduleId(u.getUserNo());
+		s.setScheduleNo(Integer.parseInt(scheduleNo));
+		s.setTitle(title);
+		s.setDetail(detail);
+		s.setDeadline(transformDate(deadline));
+		s.setClear(clear);
+		
+		int result = new ScheduleService().updateSchedule(u, s, scheduleNo);
+		
+		if(result > 0) {
+			new Menu().displaySuccess("일정수정 완료!");
+		} else {
+			new Menu().displayFail("일정수정에 실패하였습니다.");
+		}
+	}
+	
+	public void deleteSchedule(String scheduleNo) {
+		int result = new ScheduleService().deleteSchedule(scheduleNo);
+		
+		if(result > 0) {
+			new Menu().displaySuccess("해당 일정이 삭제되었습니다.");
+		} else {
+			new Menu().displayFail("일정 삭제에 실패하였습니다.");
+		}
+		
+	}
 }

@@ -24,7 +24,7 @@ public class ScheduleDao {
 			pstmt.setInt(1, u.getUserNo());
 			pstmt.setString(2, s.getTitle());
 			pstmt.setString(3, s.getDetail());
-			pstmt.setString(4, s.getDeadline());
+			pstmt.setDate(4, s.getDeadline());
 			
 			result = pstmt.executeUpdate();
 			
@@ -42,8 +42,7 @@ public class ScheduleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT SCHEDULE_NO, TITLE, DETAIL, DEADLINE, CLEAR_YN"
-				+ " FROM SCHEDULE WHERE SCHEDULE_ID = ? ORDER BY SCHEDULE_NO";
+		String sql = "SELECT * FROM SCHEDULE WHERE SCHEDULE_ID = ? ORDER BY SCHEDULE_NO";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -57,11 +56,12 @@ public class ScheduleDao {
 					rset.getInt("SCHEDULE_NO"),
 					rset.getString("TITLE"),
 					rset.getString("DETAIL"),
-					rset.getString("DEADLINE"),
+					rset.getDate("DEADLINE"),
 					rset.getString("CLEAR_YN"));
 				
-				list.add(s);
+				list.add(s);				
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -72,4 +72,52 @@ public class ScheduleDao {
 		return list;
 		
 	}
+	
+	public int updateSchedule(Connection conn, User u, Schedule s, String scheduleNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE SCHEDULE SET TITLE = ?, DETAIL = ?, DEADLINE = ?, CLEAR_YN = ? WHERE SCHEDULE_NO = ?";               
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, s.getTitle());
+			pstmt.setString(2, s.getDetail());
+			pstmt.setDate(3, s.getDeadline());
+			pstmt.setString(4, s.getClear());
+			pstmt.setInt(5, Integer.parseInt(scheduleNo));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteSchedule(Connection conn, String scheduleNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM SCHEDULE WHERE SCHEDULE_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(scheduleNo));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
 }

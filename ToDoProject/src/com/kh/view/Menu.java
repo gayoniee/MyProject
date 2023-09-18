@@ -94,11 +94,11 @@ public class Menu {
 			System.out.println("\n==To-Do Menu==");
 			System.out.println("1. 일정 추가");
 			System.out.println("2. 내 일정 조회");
-			System.out.println("3. 일정 수정");
+			System.out.println("3. 일정 수정");  // 수행여부만 바꾸는 것 시도
 			System.out.println("4. 일정 삭제");
 			System.out.println("5. 내 정보 수정");
 			System.out.println("6. 내 정보 조회");
-			System.out.println("7. 회원 탈퇴");
+			System.out.println("7. 회원 탈퇴");  // 탈퇴하면 메인메뉴로
 			System.out.println("0. 로그아웃");
 			
 			System.out.print(">> 메뉴 선택 : ");
@@ -113,13 +113,13 @@ public class Menu {
 					scr.viewSchedule(u);
 				}break;
 				case 3:{
-					
+					updateSchedule(u);
 				}break;
 				case 4:{
-					
+					deleteSchedule(u);
 				}break;
 				case 5:{
-					
+					updateUser(u);
 				}break;
 				case 6:{
 					
@@ -146,12 +146,59 @@ public class Menu {
 		System.out.print("세부내용 : ");
 		String detail = sc.nextLine();
 		
-		System.out.print("마감일(YY/MM/DD) : ");
+		System.out.print("마감일(YYYYMMDD) : ");
 		String deadline = sc.nextLine();
 		
 		scr.insertToDo(u, title, detail, deadline);
 	}
 	
+	public void updateSchedule(User u) {
+		System.out.println("\n=== 일정 수정 ===");
+		
+		System.out.print("수정할 일정 코드 : ");
+		String scheduleNo = sc.nextLine();
+		
+		System.out.print("수정할 일정 제목 : ");
+		String title = sc.nextLine();
+		
+		System.out.print("수정할 세부내용 : ");
+		String detail = sc.nextLine();
+		
+		System.out.print("수정할 마감일(YYYYMMDD) : ");
+		String deadline = sc.nextLine();
+		
+		System.out.print("수행여부 수정(Y/N) : ");
+		String clear = sc.nextLine().toUpperCase();
+		
+		scr.updateSchedule(u, scheduleNo, title, detail, deadline, clear);
+	}
+	
+	public void deleteSchedule(User u) {
+		System.out.println("\n=== 일정 삭제 ===");
+		
+		System.out.print("삭제할 일정 코드 : ");
+		String scheduleNo = sc.nextLine();
+		
+		scr.deleteSchedule(scheduleNo);
+	}
+	
+	public void updateUser(User u) {
+		System.out.println("\n=== 내 정보 수정 ===");
+		
+		System.out.print("변경할 비밀번호 : ");
+		String userPw = sc.nextLine();
+		
+		System.out.print("변경할 이름 : ");
+		String userName = sc.nextLine();
+		
+		System.out.print("변경할 이메일 : ");
+		String email = sc.nextLine();
+		
+		System.out.print("변경할 전화번호 : ");
+		String phone = sc.nextLine();
+		
+		uc.updateUser(u, userPw, userName, email, phone);
+	}
 	
 	//-------------------------------응답화면----------------------------------
 	
@@ -180,9 +227,8 @@ public class Menu {
 			System.out.println("\n" + message);
 		}
 		
-		
 		public void displayScheduleList(ArrayList<Schedule> list) {
-			System.out.println("\n조회된 데이터는 다음과 같습니다\n");
+			System.out.println("\n조회된 일정은 다음과 같습니다\n");
 			
 			for(int i = 0; i < list.size(); i++) {
 				System.out.println(list.get(i));
