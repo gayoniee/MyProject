@@ -16,7 +16,7 @@ public class ScheduleDao {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO SCHEDULE VALUES(?, SCHEDULE_NO_SEQ.NEXTVAL, ?, ?, ?, DEFAULT)";               
+		String sql = "INSERT INTO SCHEDULE VALUES(?, SCHEDULE_ID_SEQ.NEXTVAL, ?, ?, ?, DEFAULT)";               
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class ScheduleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM SCHEDULE WHERE SCHEDULE_ID = ? ORDER BY SCHEDULE_NO";
+		String sql = "SELECT * FROM SCHEDULE WHERE SCHEDULE_NO = ? ORDER BY SCHEDULE_ID";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class ScheduleDao {
 			while(rset.next()) {
 				
 				Schedule s = new Schedule(
-					rset.getInt("SCHEDULE_NO"),
+					rset.getInt("SCHEDULE_ID"),
 					rset.getString("TITLE"),
 					rset.getString("DETAIL"),
 					rset.getDate("DEADLINE"),
@@ -73,11 +73,11 @@ public class ScheduleDao {
 		
 	}
 	
-	public int updateSchedule(Connection conn, User u, Schedule s, String scheduleNo) {
+	public int updateSchedule(Connection conn, User u, Schedule s, String scheduleId) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE SCHEDULE SET TITLE = ?, DETAIL = ?, DEADLINE = ?, CLEAR_YN = ? WHERE SCHEDULE_NO = ?";               
+		String sql = "UPDATE SCHEDULE SET TITLE = ?, DETAIL = ?, DEADLINE = ?, CLEAR_YN = ? WHERE SCHEDULE_ID = ?";               
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -86,7 +86,7 @@ public class ScheduleDao {
 			pstmt.setString(2, s.getDetail());
 			pstmt.setDate(3, s.getDeadline());
 			pstmt.setString(4, s.getClear());
-			pstmt.setInt(5, Integer.parseInt(scheduleNo));
+			pstmt.setInt(5, Integer.parseInt(scheduleId));
 			
 			result = pstmt.executeUpdate();
 			
@@ -99,15 +99,15 @@ public class ScheduleDao {
 		return result;
 	}
 	
-	public int deleteSchedule(Connection conn, String scheduleNo) {
+	public int deleteSchedule(Connection conn, String scheduleId) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM SCHEDULE WHERE SCHEDULE_NO = ?";
+		String sql = "DELETE FROM SCHEDULE WHERE SCHEDULE_ID = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.parseInt(scheduleNo));
+			pstmt.setInt(1, Integer.parseInt(scheduleId));
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

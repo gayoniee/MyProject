@@ -156,7 +156,7 @@ public class Menu {
 		System.out.println("\n=== 일정 수정 ===");
 		
 		System.out.print("수정할 일정 코드 : ");
-		String scheduleNo = sc.nextLine();
+		String scheduleId = sc.nextLine();
 		
 		System.out.print("수정할 일정 제목 : ");
 		String title = sc.nextLine();
@@ -170,16 +170,16 @@ public class Menu {
 		System.out.print("수행여부 수정(Y/N) : ");
 		String clear = sc.nextLine().toUpperCase();
 		
-		scr.updateSchedule(u, scheduleNo, title, detail, deadline, clear);
+		scr.updateSchedule(u, scheduleId, title, detail, deadline, clear);
 	}
 	
 	public void deleteSchedule(User u) {
 		System.out.println("\n=== 일정 삭제 ===");
 		
 		System.out.print("삭제할 일정 코드 : ");
-		String scheduleNo = sc.nextLine();
+		String scheduleId = sc.nextLine();
 		
-		scr.deleteSchedule(scheduleNo);
+		scr.deleteSchedule(scheduleId);
 	}
 	
 	public void updateUser(User u) {

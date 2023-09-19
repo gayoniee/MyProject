@@ -34,10 +34,10 @@ public class ScheduleService {
 		return list;
 	}
 	
-	public int updateSchedule(User u, Schedule s, String scheduleNo) {
+	public int updateSchedule(User u, Schedule s, String scheduleId) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new ScheduleDao().updateSchedule(conn, u, s, scheduleNo);
+		int result = new ScheduleDao().updateSchedule(conn, u, s, scheduleId);
 		
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
@@ -49,10 +49,10 @@ public class ScheduleService {
 		return result;
 	}
 	
-	public int deleteSchedule(String scheduleNo) {
+	public int deleteSchedule(String scheduleId) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new ScheduleDao().deleteSchedule(conn, scheduleNo);
+		int result = new ScheduleDao().deleteSchedule(conn, scheduleId);
 		
 		if(result > 0) {
 			JDBCTemplate.commit(conn);

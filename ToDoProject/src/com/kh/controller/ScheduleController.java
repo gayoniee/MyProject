@@ -53,17 +53,17 @@ public class ScheduleController {
 		}
 	}
 
-	public void updateSchedule(User u, String scheduleNo, String title, String detail, String deadline, String clear) {
+	public void updateSchedule(User u, String scheduleId, String title, String detail, String deadline, String clear) {
 		Schedule s = new Schedule();
 		
 		s.setScheduleId(u.getUserNo());
-		s.setScheduleNo(Integer.parseInt(scheduleNo));
+		s.setScheduleNo(Integer.parseInt(scheduleId));
 		s.setTitle(title);
 		s.setDetail(detail);
 		s.setDeadline(transformDate(deadline));
 		s.setClear(clear);
 		
-		int result = new ScheduleService().updateSchedule(u, s, scheduleNo);
+		int result = new ScheduleService().updateSchedule(u, s, scheduleId);
 		
 		if(result > 0) {
 			new Menu().displaySuccess("일정수정 완료!");
@@ -72,8 +72,8 @@ public class ScheduleController {
 		}
 	}
 	
-	public void deleteSchedule(String scheduleNo) {
-		int result = new ScheduleService().deleteSchedule(scheduleNo);
+	public void deleteSchedule(String scheduleId) {
+		int result = new ScheduleService().deleteSchedule(scheduleId);
 		
 		if(result > 0) {
 			new Menu().displaySuccess("해당 일정이 삭제되었습니다.");
