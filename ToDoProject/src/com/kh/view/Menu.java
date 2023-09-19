@@ -122,7 +122,7 @@ public class Menu {
 					updateUser(u);
 				}break;
 				case 6:{
-					
+					uc.viewMyInfo();
 				}break;
 				case 7:{
 					

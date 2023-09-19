@@ -51,7 +51,11 @@ public class UserController {
 			new Menu().displaySuccess("내 정보가 수정되었습니다.");
 		} else {
 			new Menu().displayFail("정보 수정에 실패하였습니다.");
-		}
+		}	
+	}
+	
+	public void viewMyInfo() {
 		
 	}
+	
 }
