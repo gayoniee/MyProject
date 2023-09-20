@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.model.vo.User;
@@ -100,4 +101,26 @@ public class UserDao {
 		
 		return result;
 	}
+	
+	public int deleteUser(Connection conn, User u) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM USERS WHERE USER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, u.getUserId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }

@@ -122,10 +122,10 @@ public class Menu {
 					updateUser(u);
 				}break;
 				case 6:{
-					uc.viewMyInfo();
+					System.out.println(u.toString());
 				}break;
 				case 7:{
-					
+					deleteUser(u);
 				}break;
 				case 0:{
 					System.out.println("메인 메뉴로 돌아갑니다.");
@@ -200,6 +200,19 @@ public class Menu {
 		uc.updateUser(u, userPw, userName, email, phone);
 	}
 	
+	public void deleteUser(User u) {
+		
+		System.out.print("비밀번호를 입력하시면 탈퇴됩니다 : ");
+		String password = sc.nextLine();
+		
+		if(password.equals(u.getUserPw())) {
+			uc.deleteUser(u);
+		} else {
+			System.out.println("비밀번호 불일치");
+			toDoMenu(u);
+		}
+	}
+	
 	//-------------------------------응답화면----------------------------------
 	
 		/**
@@ -232,8 +245,11 @@ public class Menu {
 			
 			for(int i = 0; i < list.size(); i++) {
 				System.out.println(list.get(i));
-			}
-			
-				
+			}							
+		}
+		
+		public void deleteSuccess(String message) {
+			System.out.println("\n" + message);
+			mainMenu();
 		}
 }

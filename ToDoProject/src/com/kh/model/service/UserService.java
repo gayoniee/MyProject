@@ -1,6 +1,7 @@
 package com.kh.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.model.dao.UserDao;
@@ -49,5 +50,18 @@ public class UserService {
 		return result;
 	}
 	
-	
+	public int deleteUser(User u) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().deleteUser(conn, u);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

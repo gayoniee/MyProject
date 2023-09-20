@@ -1,5 +1,9 @@
 package com.kh.controller;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import com.kh.common.JDBCTemplate;
 import com.kh.model.service.UserService;
 import com.kh.model.vo.User;
 import com.kh.view.Menu;
@@ -54,8 +58,17 @@ public class UserController {
 		}	
 	}
 	
-	public void viewMyInfo() {
+	public void deleteUser(User u) {
 		
+		int result = new UserService().deleteUser(u);
+		
+		if(result > 0) {
+			new Menu().deleteSuccess("회원탈퇴되었습니다. 메인메뉴로 돌아갑니다.");
+		} else {
+			new Menu().displayFail("회원탈퇴에 실패하였습니다.");
+		}
 	}
+		
+	
 	
 }
