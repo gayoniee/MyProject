@@ -42,7 +42,7 @@ public class ScheduleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "SELECT * FROM SCHEDULE WHERE SCHEDULE_NO = ? ORDER BY SCHEDULE_ID";
+		String sql = "SELECT * FROM SCHEDULE WHERE USER_NO = ? ORDER BY SCHEDULE_ID";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -77,7 +77,7 @@ public class ScheduleDao {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE SCHEDULE SET TITLE = ?, DETAIL = ?, DEADLINE = ?, CLEAR_YN = ? WHERE SCHEDULE_ID = ?";               
+		String sql = "UPDATE SCHEDULE SET TITLE = ?, DETAIL = ?, DEADLINE = ?, CLEAR_YN = ? WHERE SCHEDULE_ID = ? AND USER_NO = ?";               
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -87,6 +87,7 @@ public class ScheduleDao {
 			pstmt.setDate(3, s.getDeadline());
 			pstmt.setString(4, s.getClear());
 			pstmt.setInt(5, Integer.parseInt(scheduleId));
+			pstmt.setInt(6, u.getUserNo());
 			
 			result = pstmt.executeUpdate();
 			

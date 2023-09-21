@@ -56,8 +56,6 @@ public class ScheduleController {
 	public void updateSchedule(User u, String scheduleId, String title, String detail, String deadline, String clear) {
 		Schedule s = new Schedule();
 		
-		s.setScheduleId(u.getUserNo());
-		s.setScheduleNo(Integer.parseInt(scheduleId));
 		s.setTitle(title);
 		s.setDetail(detail);
 		s.setDeadline(transformDate(deadline));

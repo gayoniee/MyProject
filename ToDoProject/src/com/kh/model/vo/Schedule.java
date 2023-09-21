@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Schedule {
 	
 	private int scheduleId;
-	private int scheduleNo;
+	private int userNo;
 	private String title;
 	private String detail;
 	private Date deadline;
@@ -17,8 +17,8 @@ public class Schedule {
 
 	
 	
-	public Schedule(int scheduleNo, String title, String detail, Date deadline, String clear) {
-		this.scheduleNo = scheduleNo;
+	public Schedule(int userNo, String title, String detail, Date deadline, String clear) {
+		this.userNo = userNo;
 		this.title = title;
 		this.detail = detail;
 		this.deadline = deadline;
@@ -26,10 +26,10 @@ public class Schedule {
 	}
 
 
-	public Schedule(int scheduleId, int scheduleNo, String title, String detail, Date deadline, String clear) {
+	public Schedule(int scheduleId, int userNo, String title, String detail, Date deadline, String clear) {
 		super();
 		this.scheduleId = scheduleId;
-		this.scheduleNo = scheduleNo;
+		this.userNo = userNo;
 		this.title = title;
 		this.detail = detail;
 		this.deadline = deadline;
@@ -52,12 +52,12 @@ public class Schedule {
 		this.scheduleId = scheduleId;
 	}
 
-	public int getScheduleNo() {
-		return scheduleNo;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setScheduleNo(int scheduleNo) {
-		this.scheduleNo = scheduleNo;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	public String getTitle() {
@@ -94,7 +94,7 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return scheduleNo + ", " + title + ", "
+		return userNo + ", " + title + ", "
 				+ detail + ", " + deadline + ", " + clear;
 	}
 	
