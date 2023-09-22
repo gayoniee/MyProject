@@ -58,6 +58,16 @@ public class UserController {
 		}	
 	}
 	
+	public void viewMyInfo(User u) {
+		User user = new UserService().viewMyInfo(u);
+		
+		if(user != null) {
+			new Menu().displayUsers(user);
+		} else {
+			new Menu().displayFail("내 정보 조회에 실패하였습니다.");
+		}
+	}
+	
 	public void deleteUser(User u) {
 		
 		int result = new UserService().deleteUser(u);

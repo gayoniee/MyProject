@@ -122,7 +122,7 @@ public class Menu {
 					updateUser(u);
 				}break;
 				case 6:{
-					System.out.println(u.toString());
+					uc.viewMyInfo(u);
 				}break;
 				case 7:{
 					deleteUser(u);
@@ -251,5 +251,9 @@ public class Menu {
 		public void deleteSuccess(String message) {
 			System.out.println("\n" + message);
 			mainMenu();
+		}
+		
+		public void displayUsers(User user) {
+			System.out.println("\n" + user.toString());
 		}
 }

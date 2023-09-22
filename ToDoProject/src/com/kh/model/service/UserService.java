@@ -50,6 +50,14 @@ public class UserService {
 		return result;
 	}
 	
+	public User viewMyInfo(User u) {
+		Connection conn = JDBCTemplate.getConnection();
+		User user = new UserDao().viewMyInfo(conn, u);
+		JDBCTemplate.close(conn);
+		
+		return user;
+	}
+	
 	public int deleteUser(User u) {
 		
 		Connection conn = JDBCTemplate.getConnection();

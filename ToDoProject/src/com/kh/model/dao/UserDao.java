@@ -102,6 +102,40 @@ public class UserDao {
 		return result;
 	}
 	
+	public User viewMyInfo(Connection conn, User u) {
+		User user = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM USERS WHERE USER_ID = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, u.getUserId());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				user = new User (rset.getInt("USER_NO"),
+							 rset.getString("USER_ID"),
+							 rset.getString("USER_PW"),
+							 rset.getString("USER_NAME"),
+							 rset.getInt("AGE"),
+							 rset.getString("GENDER"),
+							 rset.getString("EMAIL"),
+							 rset.getString("PHONE"),
+							 rset.getDate("ENROLLDATE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return user;
+	}
+	
 	public int deleteUser(Connection conn, User u) {
 		int result = 0;
 		
@@ -114,6 +148,7 @@ public class UserDao {
 			pstmt.setString(1, u.getUserId());
 			
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
