@@ -44,15 +44,19 @@ public class UserController {
 		
 		User user = new User();
 		
+		user.setUserId(u.getUserId());
 		user.setUserPw(userPw);
 		user.setUserName(userName);
+		user.setAge(u.getAge());
+		user.setGender(u.getGender());
 		user.setEmail(email);
 		user.setPhone(phone);
+		user.setEnrollDate(u.getEnrollDate());
 		
 		int result = new UserService().updateUser(u, user);
 		
 		if(result > 0) {
-			new Menu().displaySuccess("내 정보가 수정되었습니다.");
+			new Menu().updateSuccess("내 정보가 수정되었습니다.", user);
 		} else {
 			new Menu().displayFail("정보 수정에 실패하였습니다.");
 		}	

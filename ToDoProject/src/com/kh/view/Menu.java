@@ -94,7 +94,7 @@ public class Menu {
 			System.out.println("\n==To-Do Menu==");
 			System.out.println("1. 일정 추가");
 			System.out.println("2. 내 일정 조회");
-			System.out.println("3. 일정 수정");  // 수행여부만 바꾸는 것 시도
+			System.out.println("3. 일정 수정");
 			System.out.println("4. 일정 삭제");
 			System.out.println("5. 내 정보 수정");
 			System.out.println("6. 내 정보 조회");
@@ -204,7 +204,7 @@ public class Menu {
 		
 		System.out.print("비밀번호를 입력하시면 탈퇴됩니다 : ");
 		String password = sc.nextLine();
-		
+
 		if(password.equals(u.getUserPw())) {
 			uc.deleteUser(u);
 		} else {
@@ -246,6 +246,11 @@ public class Menu {
 			for(int i = 0; i < list.size(); i++) {
 				System.out.println(list.get(i));
 			}							
+		}
+		
+		public void updateSuccess(String message, User user) {
+			System.out.println("\n서비스 요청 성공 : " + message);
+			toDoMenu(user);
 		}
 		
 		public void deleteSuccess(String message) {
