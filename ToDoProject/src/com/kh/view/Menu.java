@@ -153,24 +153,30 @@ public class Menu {
 	}
 	
 	public void updateSchedule(User u) {
+		Boolean checkScheduleId = true;
 		System.out.println("\n=== 일정 수정 ===");
 		
 		System.out.print("수정할 일정 코드 : ");
-		String scheduleId = sc.nextLine();
+		String scheduleId = sc.nextLine();	
+		checkScheduleId = scr.checkScheduleId(u, scheduleId);
 		
-		System.out.print("수정할 일정 제목 : ");
-		String title = sc.nextLine();
-		
-		System.out.print("수정할 세부내용 : ");
-		String detail = sc.nextLine();
-		
-		System.out.print("수정할 마감일(YYYYMMDD) : ");
-		String deadline = sc.nextLine();
-		
-		System.out.print("수행여부 수정(Y/N) : ");
-		String clear = sc.nextLine().toUpperCase();
-		
-		scr.updateSchedule(u, scheduleId, title, detail, deadline, clear);
+		if(checkScheduleId) {
+			System.out.print("수정할 일정 제목 : ");
+			String title = sc.nextLine();
+			
+			System.out.print("수정할 세부내용 : ");
+			String detail = sc.nextLine();
+			
+			System.out.print("수정할 마감일(YYYYMMDD) : ");
+			String deadline = sc.nextLine();
+			
+			System.out.print("수행여부 수정(Y/N) : ");
+			String clear = sc.nextLine().toUpperCase();
+			
+			scr.updateSchedule(u, scheduleId, title, detail, deadline, clear);
+		} else {
+			return;
+		}
 	}
 	
 	public void deleteSchedule(User u) {

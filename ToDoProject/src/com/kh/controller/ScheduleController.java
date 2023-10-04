@@ -53,6 +53,23 @@ public class ScheduleController {
 		}
 	}
 
+	public Boolean checkScheduleId(User u, String scheduleId) {
+		ArrayList<Schedule> list = new ScheduleService().checkScheduleId(u, scheduleId);
+		
+		if(list.isEmpty()) {
+			new Menu().displayNoData("일정이 없습니다.");
+		} else {
+			for(int i = 0; i < list.size(); i++) {
+				if(list.get(i).getScheduleId() == Integer.parseInt(scheduleId)) {
+					return true;
+				}
+			}
+		}
+		
+		new Menu().displayNoData("해당 코드의 일정이 없습니다.");
+		return false;
+	}
+	
 	public void updateSchedule(User u, String scheduleId, String title, String detail, String deadline, String clear) {
 		Schedule s = new Schedule();
 		

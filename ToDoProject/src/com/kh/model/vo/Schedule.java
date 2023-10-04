@@ -17,8 +17,8 @@ public class Schedule {
 
 	
 	
-	public Schedule(int userNo, String title, String detail, Date deadline, String clear) {
-		this.userNo = userNo;
+	public Schedule(int scheduleId, String title, String detail, Date deadline, String clear) {
+		this.scheduleId = scheduleId;
 		this.title = title;
 		this.detail = detail;
 		this.deadline = deadline;
@@ -94,7 +94,7 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return userNo + ", " + title + ", "
+		return scheduleId + ", " + title + ", "
 				+ detail + ", " + deadline + ", " + clear;
 	}
 	

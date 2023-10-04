@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.kh.common.JDBCTemplate;
 import com.kh.model.vo.Schedule;
 import com.kh.model.vo.User;
+import com.kh.view.Menu;
 
 public class ScheduleDao {
 	
@@ -71,6 +72,41 @@ public class ScheduleDao {
 	
 		return list;
 		
+	}
+	
+	public ArrayList<Schedule> checkScheduleId(User u, String scheduleId, Connection conn){
+		
+		ArrayList<Schedule> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = "SELECT * FROM SCHEDULE WHERE USER_NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, u.getUserNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {							
+				Schedule s = new Schedule(
+					rset.getInt("SCHEDULE_ID"),
+					rset.getString("TITLE"),
+					rset.getString("DETAIL"),
+					rset.getDate("DEADLINE"),
+					rset.getString("CLEAR_YN"));
+				
+				list.add(s);				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+	    }	
+		
+		return list;
 	}
 	
 	public int updateSchedule(Connection conn, User u, Schedule s, String scheduleId) {

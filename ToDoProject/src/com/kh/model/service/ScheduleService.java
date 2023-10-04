@@ -34,6 +34,16 @@ public class ScheduleService {
 		return list;
 	}
 	
+	public ArrayList<Schedule> checkScheduleId(User u, String scheduleId){
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Schedule> list = new ScheduleDao().checkScheduleId(u, scheduleId, conn);
+		JDBCTemplate.close(conn);
+		
+		return list;
+		
+	}
+	
 	public int updateSchedule(User u, Schedule s, String scheduleId) {
 		
 		Connection conn = JDBCTemplate.getConnection();
