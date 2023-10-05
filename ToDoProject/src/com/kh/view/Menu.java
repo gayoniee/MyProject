@@ -126,7 +126,7 @@ public class Menu {
 				}break;
 				case 7:{
 					deleteUser(u);
-				}break;
+				}return;
 				case 0:{
 					System.out.println("메인 메뉴로 돌아갑니다.");
 				}return;
@@ -261,7 +261,7 @@ public class Menu {
 		
 		public void deleteSuccess(String message) {
 			System.out.println("\n" + message);
-			mainMenu();
+			//mainMenu();
 		}
 		
 		public void displayUsers(User user) {
